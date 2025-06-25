@@ -1,0 +1,224 @@
+/* Modern Guest Appointment Form Styles */
+body {
+  background: linear-gradient(120deg, #f8fafc 0%, #f1f5f9 100%);
+  font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+  margin: 0;
+  min-height: 100vh;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+}
+
+.frame {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 8px 32px rgba(60, 72, 88, 0.18);
+  padding: 2.5rem 2rem 2rem 2rem;
+  width: 100%;
+  max-width: 520px;
+  margin: 2rem auto;
+  border: none;
+  animation: fadeInCard 0.8s cubic-bezier(.4,0,.2,1);
+}
+
+@keyframes fadeInCard {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+legend {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 600;
+  color: #b91c1c;
+  margin-bottom: 1.5rem;
+  letter-spacing: 1px;
+}
+
+form label {
+  font-weight: 500;
+  color: #374151;
+  margin-bottom: 0.3rem;
+  display: block;
+  font-size: 1rem;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="date"],
+select {
+  width: 100%;
+  padding: 0.7rem 1rem;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 8px;
+  background: #f9fafb;
+  font-size: 1rem;
+  margin-top: 0.2rem;
+  margin-bottom: 1.1rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  outline: none;
+}
+input:focus, select:focus {
+  border-color: #b91c1c;
+  box-shadow: 0 0 0 2px #fee2e2;
+}
+
+input[type="radio"] {
+  accent-color: #b91c1c;
+  margin-right: 0.4em;
+}
+
+.blood, .selection, .fourth-line, .sixth-line, .eighth-line {
+  margin-bottom: 1.2rem;
+}
+
+.name-line, .sec-line, .third-line, .fifth-line {
+  display: flex;
+  gap: 1.2rem;
+  flex-wrap: wrap;
+}
+.firstname, .lastname, .two, .three, .five {
+  flex: 1 1 45%;
+}
+
+.sixth-line {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.six {
+  flex: 1 1 30%;
+}
+
+.ninth-line {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+.nine input[type="reset"], .nine input[type="submit"] {
+  background: linear-gradient(90deg, #b91c1c 0%, #ef4444 100%);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.7rem 1.6rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(185,28,28,0.08);
+  transition: background 0.2s, transform 0.15s;
+}
+.nine input[type="reset"]:hover, .nine input[type="submit"]:hover {
+  background: linear-gradient(90deg, #ef4444 0%, #b91c1c 100%);
+  transform: translateY(-2px) scale(1.04);
+}
+
+/* Animations for form fields */
+.frame input, .frame select {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInField 0.7s forwards;
+}
+.frame input:nth-child(n), .frame select:nth-child(n) {
+  animation-delay: calc(0.1s * var(--i));
+}
+@keyframes fadeInField {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 700px) {
+  .frame {
+    padding: 1.2rem 0.5rem;
+    max-width: 98vw;
+  }
+  .name-line, .sec-line, .third-line, .fifth-line, .sixth-line, .ninth-line {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
+
+/* Error/Success Feedback Styles */
+input:invalid {
+  border-color: #ef4444;
+  background: #fef2f2;
+}
+input:valid {
+  border-color: #22c55e;
+  background: #f0fdf4;
+}
+
+/* Hide old styles */
+.sal, .firstname, .lastname, .two, .three, .blood, .four, .five, .hos, .six, .seven, .eight, .nine, .select {
+  font-family: inherit;
+  font-weight: 400;
+  display: block;
+  margin: 0;
+}
+
+.frame{
+    background-color:  rgb(235, 223, 214);
+    border-color: rgb(129, 53, 53);
+    border:2%;
+    border-radius: 10px;
+    width:60%;
+    height: 120%;
+    margin: 3% auto;
+}
+
+
+.name-line{
+   text-align: left;
+}
+.firstname,.lastname{
+    display: inline;
+}
+
+body {
+    background-color:rgb(250, 250, 244);
+}
+
+legend{
+    text-align: center;
+    font-size: x-large;
+}
+
+input{
+    border-radius: 6px;
+    padding:1%;
+}
+
+#people,.bg,.place,#meridiem{
+    border-radius: 6px;
+    padding:1%;
+}
+#first_line{
+    padding-left: 30px;
+}
+
+.sal,.firstname,.lastname,.two,.three,.blood,.four,.five,.hos,.six,.seven,.eight,.nine,.select{
+font-family:sans-serif;
+font-weight: 350px;
+display: inline;
+margin: 0 4%;
+}
+.nine input{
+    color:aliceblue;
+    font:weight 1200px;
+    background-color: #333;
+    padding:5px 12px;
+    margin:3% 3%;
+}
+#meridiem{
+    margin: -60;
+}
+
+
+

@@ -1,0 +1,232 @@
+/* Modern Admin Form Styles */
+
+body {
+    background: #FFFCFB;
+    font-family: 'Inter', Arial, sans-serif;
+    min-height: 100vh;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 90vh;
+}
+
+.modern-admin-form-section {
+    width: 100%;
+    max-width: 520px;
+    margin: 40px auto;
+    padding: 0 16px;
+}
+
+.modern-admin-form {
+    background: rgba(9,63,180,0.05);
+    box-shadow: 0 8px 32px 0 rgba(9,63,180,0.10);
+    border-radius: 24px;
+    border: 1.5px solid #093FB4;
+    padding: 40px 32px 32px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    animation: fadeInCard 0.8s cubic-bezier(.4,0,.2,1);
+}
+
+@keyframes fadeInCard {
+    from { opacity: 0; transform: translateY(40px) scale(0.98); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.form-title {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 800;
+    color: #093FB4;
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: linear-gradient(90deg, #093FB4 0%, #ED3500 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.form-row {
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+}
+
+.form-group {
+    flex: 1 1 180px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    margin-bottom: 0;
+}
+
+.form-group label {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #093FB4;
+    margin-bottom: 6px;
+    letter-spacing: 0.2px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 0.2s;
+}
+
+.input-field {
+    font-size: 1rem;
+    padding: 14px 16px 14px 44px;
+    border: none;
+    border-radius: 14px;
+    background: #FFFCFB;
+    color: #000000;
+    box-shadow: 0 2px 8px 0 rgba(9,63,180,0.04);
+    outline: none;
+    transition: background 0.25s, box-shadow 0.25s, border 0.2s;
+    margin-bottom: 0;
+    position: relative;
+}
+.input-field:focus {
+    background: #EAF0FF;
+    box-shadow: 0 0 0 2px #093FB4, 0 2px 8px 0 rgba(9,63,180,0.08);
+}
+.input-field:hover {
+    background: #EAF0FF;
+}
+
+.form-group i {
+    position: absolute;
+    left: 16px;
+    top: 44px;
+    color: #093FB4;
+    font-size: 1.1rem;
+    pointer-events: none;
+    opacity: 0.7;
+}
+
+.gender-options {
+    display: flex;
+    gap: 18px;
+    align-items: center;
+    margin-top: 2px;
+}
+.gender-label {
+    font-weight: 500;
+    color: #093FB4;
+    margin-left: 4px;
+    cursor: pointer;
+    transition: color 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+.gender-options input[type="radio"] {
+    accent-color: #093FB4;
+    margin-right: 2px;
+    transform: scale(1.15);
+    transition: accent-color 0.2s;
+}
+.gender-options input[type="radio"]:focus + .gender-label {
+    color: #ED3500;
+}
+
+.form-terms {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.98rem;
+    color: #093FB4;
+    margin-top: 8px;
+}
+.terms-label a {
+    color: #ED3500;
+    text-decoration: underline;
+    transition: color 0.2s;
+}
+.terms-label a:hover {
+    color: #093FB4;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 16px;
+    margin-top: 8px;
+}
+.btn-reset, .btn-submit {
+    font-size: 1.08rem;
+    font-weight: 700;
+    padding: 12px 28px;
+    border: none;
+    border-radius: 18px;
+    background: linear-gradient(90deg, #093FB4 0%, #ED3500 100%);
+    color: #FFFCFB;
+    cursor: pointer;
+    box-shadow: 0 2px 8px 0 rgba(9,63,180,0.10);
+    transition: background 0.25s, transform 0.18s, box-shadow 0.18s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    position: relative;
+    overflow: hidden;
+}
+.btn-reset {
+    background: linear-gradient(90deg, #64748b 0%, #1e293b 100%);
+}
+.btn-reset:hover, .btn-reset:focus {
+    background: linear-gradient(90deg, #ED3500 0%, #093FB4 100%);
+    transform: translateY(-2px) scale(1.04);
+    box-shadow: 0 4px 16px 0 rgba(100,116,139,0.13);
+}
+.btn-submit:hover, .btn-submit:focus {
+    background: linear-gradient(90deg, #ED3500 0%, #093FB4 100%);
+    transform: translateY(-2px) scale(1.04);
+    box-shadow: 0 4px 16px 0 rgba(9,63,180,0.13);
+}
+
+@media (max-width: 700px) {
+    .modern-admin-form-section {
+        max-width: 100%;
+        padding: 0 4vw;
+    }
+    .modern-admin-form {
+        padding: 28px 8px 18px 8px;
+    }
+    .form-row {
+        flex-direction: column;
+        gap: 0;
+    }
+}
+
+/* Animations for focus/hover */
+.input-field, .btn-reset, .btn-submit {
+    will-change: background, box-shadow, transform;
+}
+
+/* Add a subtle glassy border glow on focus */
+.input-field:focus {
+    border: 1.5px solid #093FB4;
+    box-shadow: 0 0 0 2px #093FB4333, 0 2px 8px 0 rgba(9,63,180,0.08);
+}
+
+/* Responsive font for mobile */
+@media (max-width: 480px) {
+    .form-title {
+        font-size: 1.3rem;
+    }
+    .btn-reset, .btn-submit {
+        font-size: 0.98rem;
+        padding: 10px 16px;
+    }
+}

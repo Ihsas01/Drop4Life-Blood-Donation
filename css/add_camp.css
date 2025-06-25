@@ -1,0 +1,76 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+body{
+    background: #FFFCFB;
+    width: 100%;
+    margin: 0;
+}
+.Camp{
+    margin-top: 2%;
+    padding: 2%;
+    margin: 2%;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px #093FB422;
+    background-color: #EAF0FF;
+}
+form{
+    text-align: left;
+    color: #093FB4;
+    text-shadow: none;
+    border-bottom: solid 1px #093FB4;
+}
+
+.main-user-info{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 5%;
+}
+
+.user-input-box{
+    display: bottom;
+    width:80%;
+    height: 20%;
+    padding-bottom: 2%;
+}
+.user-input-box > label{
+    width: 68%;
+    color: #093FB4;
+    font-size: 120%;
+    font-weight: 200;
+    margin: 1%;
+    margin-inline: 15%;
+}
+.user-input-box > input{
+    height: 75%;
+    width: 60%;
+    border-radius: 7px;
+    outline: none;
+    background: #FFFCFB;
+    color: #000000;
+    border: 1.5px solid #093FB4;
+    padding: 1%;
+    margin-left: 14%;
+}
+.form-submit-btn {
+    font-size: large;
+    border-radius: 10px;
+    color: gray;
+    margin-left: 11%;
+    margin-top: 2%;
+}
+.form-submit-btn > button{
+    font-size: large;
+    width: 120%;
+    height: 100%;
+    border-radius: 10px;
+    margin-top: 10%;
+    background: linear-gradient(90deg, #093FB4 0%, #ED3500 100%);
+    color: #FFFCFB;
+}
+.form-submit-btn > button:hover{
+    background: linear-gradient(90deg, #ED3500 0%, #093FB4 100%);
+}

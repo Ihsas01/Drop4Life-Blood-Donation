@@ -1,0 +1,277 @@
+body {
+  background: linear-gradient(120deg, #f8fafc 0%, #e0e7ef 100%);
+  min-height: 100vh;
+  font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.hospital-panel-frame {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 32px 16px;
+  background: rgba(255,255,255,0.7);
+  border-radius: 32px;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.18);
+}
+
+.hospital-panel-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 24px;
+  border-bottom: 2px solid #e5e7eb;
+  margin-bottom: 32px;
+  background: transparent;
+}
+.hospital-panel-user {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.hospital-panel-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #1a2236;
+  margin: 0;
+}
+.hospital-panel-email {
+  font-size: 1.1rem;
+  color: #64748b;
+  font-weight: 400;
+}
+.hospital-panel-actions {
+  display: flex;
+  gap: 16px;
+}
+
+.hero-btn-modern {
+  position: relative;
+  padding: 0.7em 2.2em;
+  border: none;
+  border-radius: 2em;
+  background: linear-gradient(90deg, #3a8dde 0%, #6f6ee8 100%);
+  color: #fff;
+  font-size: 1.1em;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 2px 12px rgba(58,141,222,0.08);
+  overflow: hidden;
+  transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
+  outline: none;
+}
+.hero-btn-modern:hover, .hero-btn-modern:focus {
+  background: linear-gradient(90deg, #6f6ee8 0%, #3a8dde 100%);
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 4px 24px rgba(58,141,222,0.18);
+}
+.hero-btn-modern .ripple {
+  position: absolute;
+  border-radius: 50%;
+  transform: scale(0);
+  animation: ripple 0.6s linear;
+  background: rgba(255,255,255,0.5);
+  pointer-events: none;
+  z-index: 2;
+}
+@keyframes ripple {
+  to {
+    transform: scale(2.5);
+    opacity: 0;
+  }
+}
+
+.hospital-panel-content {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.hospital-panel-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 32px;
+  width: 100%;
+}
+.hospital-panel-card {
+  background: rgba(255,255,255,0.55);
+  border-radius: 24px;
+  box-shadow: 0 4px 24px rgba(31,38,135,0.10);
+  padding: 24px 20px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  min-height: 320px;
+  position: relative;
+  transition: box-shadow 0.3s, transform 0.2s;
+}
+.hospital-panel-card:hover {
+  box-shadow: 0 8px 32px rgba(31,38,135,0.18);
+  transform: translateY(-4px) scale(1.02);
+}
+.hospital-panel-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+.hospital-panel-card-header h3 {
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: #2d4059;
+  margin: 0;
+}
+.hospital-panel-card-links {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.badge-new, .badge-live {
+  background: linear-gradient(90deg, #ffb347 0%, #ffcc33 100%);
+  color: #fff;
+  font-size: 0.95em;
+  font-weight: 600;
+  border-radius: 1em;
+  padding: 0.2em 1em;
+  margin-right: 6px;
+  letter-spacing: 0.03em;
+  box-shadow: 0 1px 4px rgba(255,204,51,0.08);
+}
+.history-link {
+  color: #3a8dde;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+.history-link:hover {
+  color: #6f6ee8;
+  text-decoration: underline;
+}
+
+.card-glass {
+  background: rgba(255,255,255,0.85);
+  border-radius: 18px;
+  box-shadow: 0 2px 12px rgba(31,38,135,0.08);
+  padding: 18px 16px;
+  margin-bottom: 18px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  transition: box-shadow 0.3s, transform 0.2s;
+  border: 1px solid rgba(58,141,222,0.08);
+  position: relative;
+}
+.card-glass:hover {
+  box-shadow: 0 6px 24px rgba(31,38,135,0.16);
+  transform: scale(1.015);
+}
+
+/* Appointment, Camp, Request Info */
+.appointment-info, .camp-info, .request-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 1.05em;
+  color: #1a2236;
+}
+.appointment-id, .camp-id, .request-id {
+  font-weight: 700;
+  color: #3a8dde;
+  margin-bottom: 2px;
+}
+.badge-bloodgroup {
+  background: linear-gradient(90deg, #ff5e62 0%, #ff9966 100%);
+  color: #fff;
+  font-size: 0.95em;
+  font-weight: 600;
+  border-radius: 1em;
+  padding: 0.2em 1em;
+  margin: 2px 0 2px 0;
+  letter-spacing: 0.03em;
+  box-shadow: 0 1px 4px rgba(255,94,98,0.08);
+}
+
+/* Actions */
+.appointment-actions, .camp-actions, .request-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-end;
+}
+.inline-form {
+  display: inline;
+}
+
+/* Emergency Request Form */
+.emergency-request-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: flex-start;
+}
+.bg-select {
+  padding: 8px 18px;
+  border-radius: 1.5em;
+  border: 1px solid #d1d5db;
+  font-size: 1.1em;
+  background: #f3f4f6;
+  color: #1a2236;
+  font-weight: 500;
+  outline: none;
+  transition: border 0.2s;
+}
+.bg-select:focus {
+  border: 1.5px solid #3a8dde;
+}
+
+/* Reveal on Scroll Animation */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(40px) scale(0.98);
+  transition: opacity 0.7s cubic-bezier(.4,0,.2,1), transform 0.7s cubic-bezier(.4,0,.2,1);
+}
+.reveal-on-scroll.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Responsive Design */
+@media (max-width: 900px) {
+  .hospital-panel-frame {
+    padding: 16px 2vw;
+  }
+  .hospital-panel-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+  }
+  .hospital-panel-cards {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+@media (max-width: 600px) {
+  .hospital-panel-frame {
+    padding: 6px 0;
+    border-radius: 0;
+  }
+  .hospital-panel-header {
+    padding-bottom: 12px;
+    margin-bottom: 18px;
+  }
+  .hospital-panel-title {
+    font-size: 1.3rem;
+  }
+  .hospital-panel-card {
+    padding: 12px 6px 10px 6px;
+    min-height: 180px;
+  }
+  .card-glass {
+    padding: 8px 4px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
