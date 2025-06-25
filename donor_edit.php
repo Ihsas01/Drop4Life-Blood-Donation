@@ -3,6 +3,10 @@ require 'includes/dbh.inc.php';
 include 'CRUD/edit_donor_process.php';
 require 'header.php';
 
+if (!isset($_SESSION['userID']) || empty($_SESSION['userID'])) {
+    die('User not logged in or session expired.');
+}
+
 if (isset($_SESSION['edit_success']) && $_SESSION['edit_success']) {
     echo '<div style="background:#d4edda;color:#155724;padding:15px;margin:20px auto 0 auto;border-radius:5px;max-width:600px;text-align:center;font-weight:bold;">Profile updated successfully!</div>';
     unset($_SESSION['edit_success']);

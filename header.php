@@ -129,6 +129,9 @@ if (isset($_SESSION["userID"])) {
                                 <img class="dropdown-avatar" src="images/user.png" alt="User" />
                                 <div class="dropdown-user-info">
                                     <span class="dropdown-name">Welcome</span>
+                                    <?php if (isset($_SESSION['username']) && $userType !== 'guest'): ?>
+                                        <span class="dropdown-user-realname"><?php echo htmlspecialchars($_SESSION['username']); ?></span>
+                                    <?php endif; ?>
                                     <span class="dropdown-role"><?php echo ucfirst($userType); ?></span>
                                 </div>
                             </div>

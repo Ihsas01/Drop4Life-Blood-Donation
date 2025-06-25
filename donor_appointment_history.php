@@ -3,12 +3,16 @@ require 'header.php';
 require 'includes/function.inc.php';
 require 'includes/dbh.inc.php';
 
+if (!isset($_SESSION['userID']) || empty($_SESSION['userID'])) {
+    die('User not logged in or session expired.');
+}
+
 $sql = "SELECT * ,
 hospital.H_Name,
 CONCAT(A_Time, ' ', A_meridiem) AS ATM
 FROM appointment 
 LEFT JOIN hospital ON appointment.A_Hospital_id = hospital.Hospital_id
-WHERE A_Donor_id = $_SESSION[userID]";
+WHERE A_Donor_id = " . $_SESSION['userID'];
 $result = $con->query($sql);
 
 

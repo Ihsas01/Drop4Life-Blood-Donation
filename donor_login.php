@@ -1,4 +1,5 @@
 <?php
+include 'includes/dbh.inc.php';
 include 'includes/function.inc.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {

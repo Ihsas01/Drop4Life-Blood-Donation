@@ -1,5 +1,11 @@
 <?php
 require 'header.php';
+
+if (!isset($_SESSION['userType']) || $_SESSION['userType'] !== 'donor') {
+    header('Location: donor_login.php');
+    exit();
+}
+
 require 'CRUD/donor_manage_Appoint.php';
 require 'includes/function.inc.php';
 
@@ -34,10 +40,14 @@ if (isset($_SESSION['userType']) && $_SESSION['userType'] === 'donor') {
     <section class="sec1">
       <div class="row1">
         <?php
-        echo '<h2 class="title">Welcome Back, ' . htmlspecialchars($_SESSION['username']) . '</h2>';
+        $username = isset($_SESSION['username']) ? $_SESSION['username'] : 'Donor';
+        echo '<h2 class="title">Welcome Back, ' . htmlspecialchars($username) . '</h2>';
         ?>
         <div>
-          <?php echo '<h5 class="head">' . htmlspecialchars($_SESSION['email']) . '</h5>'; ?>
+          <?php 
+          $email = isset($_SESSION['email']) ? $_SESSION['email'] : '';
+          echo '<h5 class="head">' . htmlspecialchars($email) . '</h5>'; 
+          ?>
         </div>
         <div class="but1">
           <button class="editB hero-btn-modern" onclick="document.location='donor_edit.php'" aria-label="Edit Profile">
