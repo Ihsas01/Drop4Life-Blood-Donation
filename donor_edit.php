@@ -1,13 +1,22 @@
 <?php
-require 'header.php';
 require 'includes/dbh.inc.php';
 include 'CRUD/edit_donor_process.php';
+require 'header.php';
 
-$query = "SELECT *
-     FROM donor
-     WHERE Donor_id='$_SESSION[userID]'";
- 
+if (isset($_SESSION['edit_success']) && $_SESSION['edit_success']) {
+    echo '<div style="background:#d4edda;color:#155724;padding:15px;margin:20px auto 0 auto;border-radius:5px;max-width:600px;text-align:center;font-weight:bold;">Profile updated successfully!</div>';
+    unset($_SESSION['edit_success']);
+}
+
+$query = "SELECT * FROM donor WHERE Donor_id='" . $_SESSION['userID'] . "'";
 $result_donor = mysqli_query($conn, $query);
+
+if (!$result_donor || mysqli_num_rows($result_donor) === 0) {
+    echo '<div style="background:#f8d7da;color:#721c24;padding:15px;margin:20px auto 0 auto;border-radius:5px;max-width:600px;text-align:center;font-weight:bold;">Donor details not found.</div>';
+    require 'footer.php';
+    echo '</html>';
+    exit();
+}
 
 $row = mysqli_fetch_assoc($result_donor);
 $Fname = $row['F_name'];
@@ -19,10 +28,6 @@ $city = $row['City'];
 $postalCode = $row['Postal_Code'];
 $country = $row['Country'];
 $Password = $row['D_Password'];
-
-if (!$result_donor) {
-    die('Error: ' . mysqli_error($conn));
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">

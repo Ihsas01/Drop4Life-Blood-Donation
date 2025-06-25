@@ -3,6 +3,19 @@ require 'header.php';
 require 'CRUD/donor_manage_Appoint.php';
 require 'includes/function.inc.php';
 
+// Ensure donor session variables are set
+if (isset($_SESSION['userType']) && $_SESSION['userType'] === 'donor') {
+    if (!isset($_SESSION['username']) || !isset($_SESSION['email'])) {
+        require_once 'includes/dbh.inc.php';
+        $donorId = $_SESSION['userID'];
+        $result = mysqli_query($con, "SELECT Salutation, F_name, L_name, Email FROM donor WHERE Donor_id='$donorId'");
+        if ($result && $row = mysqli_fetch_assoc($result)) {
+            $_SESSION['username'] = $row['Salutation'] . ' ' . $row['F_name'] . ' ' . $row['L_name'];
+            $_SESSION['email'] = $row['Email'];
+        }
+    }
+}
+
 ?>
 
 <!DOCTYPE html>

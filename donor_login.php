@@ -1,5 +1,4 @@
 <?php
-include 'header.php';
 include 'includes/function.inc.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -7,6 +6,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $password = $_POST['password'];
   donorLogin($con, $email, $password);
 }
+
+include 'header.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">

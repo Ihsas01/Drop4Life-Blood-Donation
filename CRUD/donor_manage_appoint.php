@@ -17,7 +17,7 @@ $query = "SELECT *,
           hospital.H_Name AS HospitalName
           FROM appointment
           LEFT JOIN hospital ON appointment.A_Hospital_id = hospital.Hospital_id
-          WHERE A_Donor_id=$_SESSION[userID] AND appointment.Status IS NULL ";
+          WHERE appointment.A_Donor_id='{$_SESSION['userID']}' AND appointment.Status IS NULL ";
 $result_appointments = mysqli_query($conn, $query);
 
 if (!$result_appointments) {

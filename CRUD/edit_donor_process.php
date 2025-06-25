@@ -1,10 +1,11 @@
 <?php
+session_start();
 include 'dbh.crud.php';
 
 
 if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete'])){
     $DonorID = $_SESSION['userID'];
-    $delete_query1 = "DELETE FROM appointment WHERE Donor_id='$DonorID' AND Status is NULL";
+    $delete_query1 = "DELETE FROM appointment WHERE A_Donor_id='$DonorID' AND Status is NULL";
     if($conn->query($delete_query1)===TRUE){
     $conn->query("SET FOREIGN_KEY_CHECKS=0");
     
@@ -41,10 +42,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update'])) {
     $sql = "UPDATE donor SET F_name='$Fname',L_name='$Lname',  Email='$Email', Phone_no='$Phone', Line1='$Line1', City='$city',Postal_Code='$postalCode',Country='$country' WHERE Donor_id = $DonorID  ";
 
     if ($conn->query($sql) === TRUE) {
-        echo '<script>';
-        echo 'alert("Record Updated Successfully !!");';
-        echo 'window.location.href = "./donor_panel.php";';
-        echo '</script>';
+        session_start();
+        $_SESSION['edit_success'] = true;
+        header('Location: ../donor_edit.php');
+        exit();
     } else {
 
         echo "Error: " . $sql . "<br>" . $conn->error;
