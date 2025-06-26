@@ -1,4 +1,34 @@
 <?php
+session_start();
+// Add debugging at the top
+error_log("Admin Edit Page Loaded - Session userID: " . (isset($_SESSION['userID']) ? $_SESSION['userID'] : 'NOT SET'));
+
+// Check if user is logged in and is an admin
+if (!isset($_SESSION['userID']) || !isset($_SESSION['userType']) || $_SESSION['userType'] !== 'admin') {
+    echo "<div style='background: red; color: white; padding: 10px; margin: 10px;'>";
+    echo "<h3>Access Denied!</h3>";
+    echo "<p>You must be logged in as an admin to access this page.</p>";
+    echo "<p>Session userID: " . (isset($_SESSION['userID']) ? $_SESSION['userID'] : 'NOT SET') . "</p>";
+    echo "<p>Session userType: " . (isset($_SESSION['userType']) ? $_SESSION['userType'] : 'NOT SET') . "</p>";
+    echo "</div>";
+    exit;
+}
+
+// Debug POST data
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    error_log("POST data received on admin_edit.php: " . print_r($_POST, true));
+    
+    // Simple test - if update button is clicked, show the data
+    if (isset($_POST['update'])) {
+        echo "<div style='background: yellow; padding: 10px; margin: 10px;'>";
+        echo "<h3>Form Submitted Successfully!</h3>";
+        echo "<p>Email: " . $_POST['email'] . "</p>";
+        echo "<p>Phone: " . $_POST['number'] . "</p>";
+        echo "<p>AdminID: " . $_POST['AdminID'] . "</p>";
+        echo "</div>";
+    }
+}
+
 include 'CRUD/edit_admin_process.php';
 require 'header.php';
 
@@ -250,7 +280,9 @@ if (!$result_admin) {
         <div class="toast-progress"></div>
     </div>
 
+    <!-- Temporarily disabled for testing
     <script src="js/admin-edit.js"></script>
+    -->
 </body>
 </html>
 

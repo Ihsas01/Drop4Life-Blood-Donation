@@ -1,6 +1,19 @@
 <?php
 include 'dbh.crud.php';
 
+// Add debugging to see if this file is being loaded
+error_log("Edit Admin Process file loaded");
+
+// Test database connection and admin table
+$test_query = "SELECT COUNT(*) as count FROM admin";
+$test_result = mysqli_query($conn, $test_query);
+if ($test_result) {
+    $test_row = mysqli_fetch_assoc($test_result);
+    error_log("Admin table test - Found " . $test_row['count'] . " admin records");
+} else {
+    error_log("Admin table test failed: " . mysqli_error($conn));
+}
+
 function getAdminID() {
     if (isset($_POST['AdminID']) && !empty($_POST['AdminID'])) {
         return $_POST['AdminID'];
@@ -31,13 +44,20 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete'])){
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update'])) {
+    error_log("Admin Update POST received - POST data: " . print_r($_POST, true));
+    
     $AdminID = getAdminID();
     $Email = $_POST["email"];
-    $Phone = $_POST["number"];
+    $Phone = intval($_POST["number"]); // Convert to integer since DB field is int(10)
+    
+    error_log("Admin Update - AdminID: $AdminID, Email: $Email, Phone: $Phone");
+    
     $sql = "UPDATE admin SET Email=?, Phone_no=? WHERE Admin_id = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("ssi", $Email, $Phone, $AdminID);
+    
     if ($stmt->execute() === TRUE) {
+        error_log("Admin Update Success - Record updated successfully");
         // Fetch the latest admin row and update all relevant session variables
         $result = $conn->query("SELECT * FROM admin WHERE Admin_id = '$AdminID'");
         if ($result && $row = $result->fetch_assoc()) {
@@ -51,6 +71,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update'])) {
         echo '</script>';
         exit;
     } else {
+        error_log("Admin Update Error: " . $stmt->error);
         echo "Error: " . $sql . "<br>" . $conn->error;
     }
     $stmt->close();

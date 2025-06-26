@@ -7,5 +7,5 @@ $dbName = 'blood_donation';
 $conn = mysqli_connect($serverName,$userName,$password,$dbName);
 
 if (!$conn) {
-    die("Not connected").mysqli_connect_error();
+    die("Not connected: " . mysqli_connect_error());
 }?>

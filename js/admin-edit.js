@@ -165,12 +165,8 @@ function initializeFormHandling() {
             submitBtn.innerHTML = '<div class="loading"></div>';
             submitBtn.disabled = true;
             
-            // Simulate processing time (remove in production)
-            setTimeout(() => {
-                submitBtn.innerHTML = originalText;
-                submitBtn.disabled = false;
-                showNotification('Profile updated successfully!', 'success');
-            }, 1000);
+            // Allow the form to submit to server - don't prevent default
+            // The PHP processing will handle the actual update
         });
     }
     
@@ -201,12 +197,8 @@ function initializeFormHandling() {
             submitBtn.innerHTML = '<div class="loading"></div>';
             submitBtn.disabled = true;
             
-            // Simulate processing time (remove in production)
-            setTimeout(() => {
-                submitBtn.innerHTML = originalText;
-                submitBtn.disabled = false;
-                showNotification('Password changed successfully!', 'success');
-            }, 1000);
+            // Allow the form to submit to server - don't prevent default
+            // The PHP processing will handle the actual password change
         });
     }
 }
