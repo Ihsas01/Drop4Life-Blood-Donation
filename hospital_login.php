@@ -1,11 +1,25 @@
 <?php
+session_start();
+
+// Redirect if already logged in
+if (isset($_SESSION["userType"]) && $_SESSION["userType"] == "hospital") {
+    header("Location: hospital_panel.php");
+    exit();
+}
+
 $hospital_login_error = '';
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   include 'includes/dbh.inc.php';
   include 'includes/function.inc.php';
   $email = $_POST['email'];
   $password = $_POST['password'];
-  hospitalLogin($con, $email, $password);
+  
+  // Debug: Check if database connection is working
+  if (!$con) {
+      $hospital_login_error = "Database connection failed";
+  } else {
+      hospitalLogin($con, $email, $password);
+  }
 }
 include 'header.php';
 ?>

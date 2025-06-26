@@ -30,9 +30,13 @@ function donorLogin($con, $email, $password)
 function hospitalLogin($con, $email, $password)
 {
     global $hospital_login_error;
-    // Check if the email exists
-    $query = "SELECT * FROM hospital WHERE Email='$email'";
-    $result = $con->query($query);
+    
+    // Use prepared statement to prevent SQL injection
+    $query = "SELECT * FROM hospital WHERE Email=?";
+    $stmt = $con->prepare($query);
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
     if ($result && $result->num_rows == 1) {
         $row = $result->fetch_assoc();
@@ -42,18 +46,29 @@ function hospitalLogin($con, $email, $password)
                 $_SESSION["userID"] = $row["Hospital_id"];
                 $_SESSION["username"] = $row["H_Name"];
                 $_SESSION["email"] = $row["Email"];
-                header("Location: hospital_panel.php");
-                exit();
+                $stmt->close();
+                
+                // Debug: Check if session was set
+                if (isset($_SESSION["userType"]) && $_SESSION["userType"] == "hospital") {
+                    header("Location: hospital_panel.php");
+                    exit();
+                } else {
+                    $hospital_login_error = "Session creation failed";
+                    return false;
+                }
             } else {
                 $hospital_login_error = "Your account is not approved yet. Please wait for admin approval.";
+                $stmt->close();
                 return false;
             }
         } else {
             $hospital_login_error = "Invalid Login Credentials";
+            $stmt->close();
             return false;
         }
     } else {
         $hospital_login_error = "Invalid Login Credentials";
+        $stmt->close();
         return false;
     }
 }

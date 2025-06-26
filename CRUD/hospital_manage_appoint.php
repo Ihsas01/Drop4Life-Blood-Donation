@@ -1,6 +1,45 @@
 <?php
+session_start();
 require 'dbh.crud.php';
 
+// Check if user is logged in as hospital
+if (!isset($_SESSION["userType"]) || $_SESSION["userType"] != "hospital") {
+    header("Location: ../hospital_login.php");
+    exit();
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $appointment_id = $_POST['appointment_id'];
+    $action = $_POST['action'];
+    
+    if ($action == "approve") {
+        $query = "UPDATE appointment SET Status = 1 WHERE Appointment_id = ? AND A_Hospital_id = ?";
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param("ii", $appointment_id, $_SESSION['userID']);
+        $result = $stmt->execute();
+        
+        if ($result) {
+            echo '<script>alert("Appointment Approved Successfully!"); window.location.href = "../hospital_panel.php";</script>';
+        } else {
+            echo '<script>alert("Error: ' . $stmt->error . '"); window.location.href = "../hospital_panel.php";</script>';
+        }
+        $stmt->close();
+    } else if ($action == "reject") {
+        $query = "UPDATE appointment SET Status = 0 WHERE Appointment_id = ? AND A_Hospital_id = ?";
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param("ii", $appointment_id, $_SESSION['userID']);
+        $result = $stmt->execute();
+        
+        if ($result) {
+            echo '<script>alert("Appointment Rejected Successfully!"); window.location.href = "../hospital_panel.php";</script>';
+        } else {
+            echo '<script>alert("Error: ' . $stmt->error . '"); window.location.href = "../hospital_panel.php";</script>';
+        }
+        $stmt->close();
+    }
+}
+
+// Legacy code for backward compatibility
 if (isset($_POST["Approved"])) {
     $AppointmentID = $_POST['AppointmentID'];
     $query = "UPDATE appointment SET appointment.Status='1' WHERE Appointment_id=$AppointmentID";
@@ -45,3 +84,4 @@ $result_appointments = mysqli_query($conn, $query);
 if (!$result_appointments) {
     $appointments_error = 'Appointments Error: ' . mysqli_error($conn);
 }
+?>
