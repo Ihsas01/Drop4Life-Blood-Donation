@@ -1,6 +1,6 @@
 <?php
 include 'dbh.crud.php';
-session_start();
+// session_start(); // Removed to avoid duplicate session_start warning
 
 if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete'])){
     $HospitalID = $_SESSION['userID'];

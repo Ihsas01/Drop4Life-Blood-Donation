@@ -80,10 +80,12 @@ if (isset($_SESSION["userID"])) {
                 </div>
                 
                 <div class="hero-actions">
+                    <?php if ($userType !== 'hospital'): ?>
                     <button class="btn-primary" onclick="appoint('<?php echo $userType; ?>')">
                         <span>Book Appointment</span>
                         <div class="btn-ripple"></div>
                     </button>
+                    <?php endif; ?>
                     <button class="btn-secondary" onclick="window.location.href='guide.php'">
                         <span>Learn More</span>
                         <div class="btn-ripple"></div>
