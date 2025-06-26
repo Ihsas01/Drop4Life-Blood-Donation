@@ -242,22 +242,24 @@ if (isset($_SESSION["userID"])) {
 
         // Appointment button ripple effect
         const appointmentBtn = document.querySelector('.appointment-btn');
-        appointmentBtn.addEventListener('click', function(e) {
-            const ripple = this.querySelector('.btn-ripple');
-            const rect = this.getBoundingClientRect();
-            const size = Math.max(rect.width, rect.height);
-            const x = e.clientX - rect.left - size / 2;
-            const y = e.clientY - rect.top - size / 2;
-            
-            ripple.style.width = ripple.style.height = size + 'px';
-            ripple.style.left = x + 'px';
-            ripple.style.top = y + 'px';
-            ripple.classList.add('active');
-            
-            setTimeout(() => {
-                ripple.classList.remove('active');
-            }, 600);
-        });
+        if (appointmentBtn) {
+            appointmentBtn.addEventListener('click', function(e) {
+                const ripple = this.querySelector('.btn-ripple');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                
+                ripple.style.width = ripple.style.height = size + 'px';
+                ripple.style.left = x + 'px';
+                ripple.style.top = y + 'px';
+                ripple.classList.add('active');
+                
+                setTimeout(() => {
+                    ripple.classList.remove('active');
+                }, 600);
+            });
+        }
     });
     </script>
 </body>
