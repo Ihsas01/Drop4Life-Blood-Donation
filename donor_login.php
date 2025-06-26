@@ -1,11 +1,27 @@
 <?php
+session_start();
 include 'includes/dbh.inc.php';
 include 'includes/function.inc.php';
 
+$login_error = '';
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  $email = $_POST['email'];
-  $password = $_POST['password'];
-  donorLogin($con, $email, $password);
+  $email = trim($_POST['email']);
+  $password = trim($_POST['password']);
+  
+  // Basic validation
+  if (empty($email) || empty($password)) {
+    $login_error = "Please enter both email and password.";
+  } else {
+    // Debug: Check if database connection is working
+    if (!$con) {
+      $login_error = "Database connection error.";
+    } else {
+      if (!donorLogin($con, $email, $password)) {
+        $login_error = "Invalid email or password. Please try again.";
+      }
+    }
+  }
 }
 
 include 'header.php';
@@ -415,6 +431,30 @@ include 'header.php';
       100% { transform: rotate(360deg); }
     }
 
+    /* Error Message */
+    .error-message {
+      background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+      color: white;
+      padding: 1rem;
+      border-radius: 12px;
+      margin-bottom: 1.5rem;
+      text-align: center;
+      font-weight: 500;
+      box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
+      animation: slideInDown 0.5s ease-out;
+    }
+
+    @keyframes slideInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
     /* Animations */
     @keyframes slideInUp {
       from {
@@ -512,6 +552,12 @@ include 'header.php';
           <p class="welcome-subtitle">Sign in to access your donor dashboard</p>
         </div>
 
+        <?php if (!empty($login_error)): ?>
+          <div class="error-message">
+            <?php echo $login_error; ?>
+          </div>
+        <?php endif; ?>
+
         <form method="POST" class="login-form" autocomplete="off" id="loginForm">
           <div class="input-group">
             <input type="email" name="email" id="email" class="input-field" placeholder=" " required>
@@ -588,11 +634,8 @@ include 'header.php';
       loginBtn.classList.add('loading');
       btnText.style.opacity = '0';
       
-      // Simulate loading (remove this in production)
-      setTimeout(() => {
-        loginBtn.classList.remove('loading');
-        btnText.style.opacity = '1';
-      }, 2000);
+      // Don't prevent default - let the form submit normally
+      // The loading state will be reset when the page reloads
     });
 
     // Input focus effects

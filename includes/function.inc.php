@@ -4,21 +4,24 @@ include 'dbh.inc.php';
 
 function donorLogin($con, $email, $password)
 {
-    $query = "SELECT * FROM donor WHERE Email='$email' AND D_Password='$password'";
-    $result = $con->query($query);
+    // Use prepared statement to prevent SQL injection
+    $query = "SELECT * FROM donor WHERE Email=? AND D_Password=?";
+    $stmt = $con->prepare($query);
+    $stmt->bind_param("ss", $email, $password);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
     if ($result && $result->num_rows == 1) {
-        $row =  $result->fetch_assoc();
+        $row = $result->fetch_assoc();
         $_SESSION["userType"] = "donor";
         $_SESSION["userID"] = $row["Donor_id"];
         $_SESSION["username"] = $row["Salutation"] . " " . $row["F_name"] . " " . $row["L_name"];
         $_SESSION["email"] = $row["Email"];
+        $stmt->close();
         header("Location: donor_panel.php");
         exit();
     } else {
-        echo '<script>';
-        echo 'alert("Invalid Login Credentials")';
-        echo '</script>';
+        $stmt->close();
         return false;
     }
 }
