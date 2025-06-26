@@ -35,14 +35,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update'])) {
     $Address = mysqli_real_escape_string($conn, $_POST["address"]);
     $City = mysqli_real_escape_string($conn, $_POST["city"]);
     $PostalCode = mysqli_real_escape_string($conn, $_POST["postalCode"]);
-    $Country = mysqli_real_escape_string($conn, $_POST["country"]);
 
-    $sql = "UPDATE hospital SET H_Name='$HospitalName', Email='$Email', Tel_no='$Phone', Line1='$Address', City='$City', Postal_Code='$PostalCode', Country='$Country' WHERE Hospital_id = $HospitalID";
+    $sql = "UPDATE hospital SET H_Name='$HospitalName', Email='$Email', Tel_no='$Phone', Line1='$Address', City='$City', Postal_Code='$PostalCode' WHERE Hospital_id = $HospitalID";
 
     if ($conn->query($sql) === TRUE) {
         // Update session variables so new info is shown immediately
         $_SESSION['username'] = $HospitalName;
-        $_SESSION['email'] = $Email;
+        // $_SESSION['email'] removed
         // Optionally add phone, etc. if used in session
         echo '<div class="message success">Profile updated successfully!</div>';
         // Optionally, you can redirect after a short delay
