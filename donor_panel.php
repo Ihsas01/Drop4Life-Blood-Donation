@@ -13,6 +13,13 @@ require 'CRUD/donor_manage_Appoint.php';
 $username = isset($_SESSION['username']) ? $_SESSION['username'] : '';
 $email = isset($_SESSION['email']) ? $_SESSION['email'] : '';
 
+// Success message for appointment booking
+$appointment_success = false;
+if (isset($_SESSION['appointment_success']) && $_SESSION['appointment_success']) {
+    $appointment_success = true;
+    unset($_SESSION['appointment_success']);
+}
+
 // Fetch appointment history
 $sql = "SELECT *, hospital.H_Name, CONCAT(A_Time, ' ', A_meridiem) AS ATM FROM appointment LEFT JOIN hospital ON appointment.A_Hospital_id = hospital.Hospital_id WHERE A_Donor_id = " . $_SESSION['userID'];
 $result = $con->query($sql);
@@ -182,6 +189,20 @@ $result = $con->query($sql);
       .modern-table th, .modern-table td { padding: 10px 6px; font-size: 0.98rem; }
       .modern-actions { flex-direction: column; gap: 10px; }
     }
+    .success-message {
+      background: linear-gradient(90deg, #4CAF50 0%, #45a049 100%);
+      color: white;
+      padding: 12px 20px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      text-align: center;
+      font-weight: 600;
+      animation: slideInDown 0.5s ease-out;
+    }
+    @keyframes slideInDown {
+      from { transform: translateY(-20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
   </style>
   <script>
     // Animate table rows on scroll
@@ -210,6 +231,11 @@ $result = $con->query($sql);
         <button class="modern-btn" onclick="window.location='logout.php'"><i class="fas fa-sign-out-alt"></i> Log Out</button>
       </div>
     </div>
+    <?php if ($appointment_success): ?>
+      <div class="success-message">
+        <i class="fas fa-check-circle"></i> Appointment booked successfully!
+      </div>
+    <?php endif; ?>
     <div class="modern-section-title"><i class="fas fa-history"></i> Appointment History</div>
     <table class="modern-table">
       <thead>

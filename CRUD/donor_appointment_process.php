@@ -1,5 +1,6 @@
 <?php
 include 'dbh.crud.php';
+session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
@@ -18,6 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $sql = "INSERT INTO appointment (A_Donor_id, A_Date, A_Time, A_Meridiem, A_Hospital_id) VALUES ('$D_ID', '$Date', '$Time', '$Meridiem', '$H_id')";
         if ($conn->query($sql) === TRUE) {
+            $_SESSION['appointment_success'] = true;
             header("Location: ./donor_panel.php");
             exit();
         } else {
