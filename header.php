@@ -108,6 +108,7 @@ if (isset($_SESSION["userID"])) {
 
                 <!-- Action Buttons -->
                 <div class="nav-actions">
+                    <?php if ($userType !== 'hospital'): ?>
                     <button class="appointment-btn" onclick="appoint('<?php echo $userType; ?>')">
                         <div class="btn-content">
                             <i class="btn-icon fas fa-calendar-plus"></i>
@@ -115,7 +116,7 @@ if (isset($_SESSION["userID"])) {
                         </div>
                         <div class="btn-ripple"></div>
                     </button>
-                    
+                    <?php endif; ?>
                     <div class="user-dropdown">
                         <button class="user-trigger" aria-haspopup="true" aria-expanded="false">
                             <div class="user-avatar">

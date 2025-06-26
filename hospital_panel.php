@@ -325,6 +325,10 @@ include 'header.php';
                     <i class="fas fa-plus-circle"></i>
                     Add Camp
                 </a>
+                <a href="add_admin.php" class="nav-btn">
+                    <i class="fas fa-user-plus"></i>
+                    Add Hospital Admin
+                </a>
                 <a href="logout.php" class="nav-btn logout">
                     <i class="fas fa-sign-out-alt"></i>
                     Logout
